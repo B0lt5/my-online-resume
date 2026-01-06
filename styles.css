@@ -1,158 +1,295 @@
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: rgb(0, 0, 0);
-            padding: 20px;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .box {
-            background-color: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-            position: relative;
-            height: fit-content;
-            border: 1px solid #e0e0e0;
-            transition: border-color 0.3s ease;
-        }
-        
-        .box:nth-child(odd) {
-            transform: rotate(-2deg);
-        }
-        
-        .box:nth-child(even) {
-            transform: rotate(3deg);
-        }
-        
-        .box:nth-child(3n) {
-            transform: rotate(1deg);
-        }
-        
-        .box:nth-child(4n) {
-            transform: rotate(-3deg);
-        }
-        
-        .box:hover {
-            transform: translateY(-5px) rotate(0deg) scale(1.02);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-            background-color: #8da9cc;
-            z-index: 10;
-            border-color: #3498db;
-        }
-        
-        h1, h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        h1 {
-            font-size: 1.8rem;
-        }
-        
-        h2 {
-            font-size: 1.4rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background-color: #3498db;
-        }
-        
-        p {
-            color: #34495e;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-        
-        dl, ul {
-            color: #34495e;
-            margin-bottom: 15px;
-        }
-        
-        dt {
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        
-        dd {
-            margin-left: 20px;
-            margin-bottom: 5px;
-        }
-        
-        ul {
-            list-style-type: none;
-        }
-        
-        li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 5px;
-        }
-        
-        li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #3498db;
-        }
-        
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 40px;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-        
-        /* Random position adjustments */
-        .box:nth-child(1) { margin-top: 20px; }
-        .box:nth-child(2) { margin-top: 50px; }
-        .box:nth-child(3) { margin-top: 10px; }
-        .box:nth-child(4) { margin-top: 40px; }
-        .box:nth-child(5) { margin-top: 30px; }
-        .box:nth-child(6) { margin-top: 60px; }
-        .box:nth-child(7) { margin-top: 5px; }
-        .box:nth-child(8) { margin-top: 35px; }
-        
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-            
-            .box:nth-child(n) {
-                transform: rotate(0deg) !important;
-                margin-top: 15px !important;
-            }
-        }
+/* 1. SETUP & VARIABLES */
+:root {
+    --bg-color: #0f172a;        /* Deep navy background */
+    --card-bg: #ffffff;         /* Clean white cards */
+    --accent-color: #3b82f6;    /* Vibrant blue for headers/links */
+    --text-primary: #1e293b;    /* Dark slate for titles */
+    --text-secondary: #475569;  /* Muted slate for body text */
+    --footer-text: #94a3b8;     /* Light grey for footer */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    /* Subtle dot-grid background pattern */
+    background-image: radial-gradient(circle at 2px 2px, #1e293b 1px, transparent 0);
+    background-size: 40px 40px; 
+    padding: 40px 20px;
+    color: var(--text-primary);
+    overflow-x: hidden; /* Prevents horizontal scroll from rotated boxes */
+}
+
+/* 2. THE GRID CONTAINER */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px; /* Increased gap to accommodate rotations */
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+/* 3. CARD BASE STYLING */
+.box {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    border: 1px solid #e2e8f0;
+}
+
+/* 4. THE SCATTERED EFFECT (Rotations & Margins) */
+.box:nth-child(odd) { transform: rotate(-2.5deg); }
+.box:nth-child(even) { transform: rotate(3deg); }
+.box:nth-child(3n) { transform: rotate(1.5deg); }
+.box:nth-child(4n) { transform: rotate(-3.5deg); }
+
+/* Randomizing vertical offsets */
+.box:nth-child(1) { margin-top: 20px; }
+.box:nth-child(2) { margin-top: 55px; }
+.box:nth-child(3) { margin-top: -10px; }
+.box:nth-child(4) { margin-top: 40px; }
+.box:nth-child(5) { margin-top: 15px; }
+.box:nth-child(6) { margin-top: 60px; }
+.box:nth-child(7) { margin-top: 0px; }
+.box:nth-child(8) { margin-top: 35px; }
+
+/* 5. HOVER INTERACTION */
+.box:hover {
+    transform: translateY(-12px) rotate(0deg) scale(1.04);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    border-color: var(--accent-color);
+}
+
+/* 6. CONTENT STYLING */
+.box img {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover; /* Keeps images from stretching */
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+h1, h2 {
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+h1 { 
+    font-size: 1.7rem;
+    margin-bottom: 15px; 
+}
+
+h2 { 
+    font-size: 1.1rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1.2px;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 8px;
+    /* border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 5px; */
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px; /* Length of the line */
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+    transform: rotate(-1deg); /* Gives it a "hand-drawn" feel */
+}
+
+p, dd, li {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+p {
+    font-weight: 700;
+    margin-top: 15px;
+    color: var(--text-primary);
+}
+
+dd {
+    margin-left: 15px;
+    margin-bottom: 8px;
+}
+
+ul { 
+    list-style: none; 
+}
+
+
+/* Pattern 1: Items 2, 4, 6, 8... (Blue Arrows) */
+.box:nth-child(2n+1) ul li::before {
+    content: "➤";
+    color: #3b82f6;
+    font-weight: 900;
+    margin-right: 8px;
+}
+
+/* Pattern 2: Items 1, 3, 5, 7... (Green Arrows) */
+.box:nth-child(2n+2) ul li::before {
+    content: "→";
+    color: #10b981;
+    font-weight: 900;
+    font-size: 1.1rem;
+    margin-right: 8px;
+}
+
+a {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
+/* 7. FOOTER */
+footer {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--footer-text);
+    background: rgba(15, 23, 42, 0.8);
+    margin-top: 50px;
+}
+
+/* 8. RESPONSIVENESS */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .box:nth-child(n) {
+        transform: rotate(0deg) !important;
+        margin-top: 0 !important;
+    }
+}
+
+
+/* 1. Define the animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) rotate(0deg);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 2. Apply it to the boxes */
+.box {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0; /* Starts invisible */
+}
+
+/* 3. Add "Staggered" delays so they pop in one after another */
+.box:nth-child(1) { animation-delay: 0.1s; }
+.box:nth-child(2) { animation-delay: 0.2s; }
+.box:nth-child(3) { animation-delay: 0.3s; }
+.box:nth-child(4) { animation-delay: 0.4s; }
+.box:nth-child(5) { animation-delay: 0.5s; }
+.box:nth-child(6) { animation-delay: 0.6s; }
+.box:nth-child(7) { animation-delay: 0.7s; }
+.box:nth-child(8) { animation-delay: 0.8s; }
+.box:nth-child(9) { animation-delay: 0.9s; }
+.box:nth-child(10) { animation-delay: 1.0s; }
+
+/* --- Back to Top Button Styling --- */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none; /* Hidden by default */
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    z-index: 1000;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#backToTop:hover {
+    transform: scale(1.1);
+    background-color: #2563eb; /* Slightly darker blue */
+}
+
+.social-icons {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Spacing between icons */
+}
+
+.social-icons a {
+    color: var(--footer-text);
+    font-size: 1.8rem; /* Makes the icons larger */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+    text-decoration: none; /* Removes underline from icon links */
+}
+
+/* Specific color for GitHub on hover */
+.social-icons a:hover .fa-github {
+    color: #ffffff; 
+}
+
+.cv-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.cv-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    border-radius: 50px; /* Round pill shape */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.cv-button:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+    text-decoration: none; /* Keep the underline off */
+}
