@@ -5,7 +5,7 @@
     --accent-color: #3b82f6;    /* Vibrant blue for headers/links */
     --text-primary: #1e293b;    /* Dark slate for titles */
     --text-secondary: #475569;  /* Muted slate for body text */
-    --footer-text: #94a3b8;     /* Light grey for footer */
+    --footer-text: #000;     /* Light grey for footer */
 }
 
 * {
@@ -101,8 +101,6 @@ h2 {
     display: inline-block;
     position: relative;
     padding-bottom: 8px;
-    /* border-bottom: 2px solid #f1f5f9;
-    padding-bottom: 5px; */
 }
 
 h2::after {
@@ -121,6 +119,10 @@ p, dd, li {
     color: var(--text-secondary);
     line-height: 1.7;
     font-size: 0.95rem;
+}
+
+p.footer-text {
+    color: var(--text-secondary);
 }
 
 p {
@@ -255,7 +257,6 @@ footer {
 }
 
 .social-icons a:hover {
-    color: var(--accent-color);
     transform: translateY(-3px);
     text-decoration: none; /* Removes underline from icon links */
 }
@@ -263,6 +264,14 @@ footer {
 /* Specific color for GitHub on hover */
 .social-icons a:hover .fa-github {
     color: #ffffff; 
+}
+
+.social-icons a:hover .fa-x-twitter {
+    color: #000000; 
+}
+
+.social-icons a:hover .fa-linkedin {
+    color: var(--accent-color);
 }
 
 .cv-container {
